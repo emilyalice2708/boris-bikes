@@ -29,6 +29,11 @@ describe DockingStation do
       bike = Bike.new
       expect(subject.dock(bike)).to eq(bike)
     end
+
+    it 'raises an error if bike already docked' do
+      subject.dock(Bike.new)
+      expect { subject.dock(Bike.new) }.to raise_error "Docking station full."
+    end
   end
 
   describe '#bike' do
