@@ -47,6 +47,13 @@ describe DockingStation do
       DockingStation::DEFAULT_CAPACITY.times { subject.dock(Bike.new) }
       expect { subject.dock(Bike.new) }.to raise_error "Docking station full."
     end
+
+    it 'does not dock broken bikes' do
+      bike = Bike.new
+      bike.is_broken
+      subject.dock(bike)
+      expect { subject.release_bike }.to raise_error "There are no docked bikes."
+    end
   end
 
 end
